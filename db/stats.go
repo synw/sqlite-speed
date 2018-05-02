@@ -6,10 +6,10 @@ import (
 	"github.com/synw/sqlite-speed/types"
 )
 
-var db *gorm.DB
+var statsDb *gorm.DB
 
 func SaveMetric(metric types.Metric) {
-	db.Create(&metric)
+	statsDb.Create(&metric)
 }
 
 func InitStats(addr string) error {
@@ -17,13 +17,13 @@ func InitStats(addr string) error {
 	if err != nil {
 		return err
 	}
-	db.AutoMigrate(&types.Metric{})
+	statsDb.AutoMigrate(&types.Metric{})
 	return nil
 }
 
 func connectStats(addr string) error {
 	var err error
-	db, err = gorm.Open("sqlite3", addr)
+	statsDb, err = gorm.Open("sqlite3", addr)
 	if err != nil {
 		return err
 	}

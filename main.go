@@ -19,10 +19,12 @@ var statsDb string = "stats.sqlite"
 func main() {
 	flag.Parse()
 	fmt.Println("Start inserting", *records, "records with the", *engine, "engine")
-	// init stats db
+	// init stuff
 	if *stats == true {
 		db.InitStats(statsDb)
 	}
+	db.InitGoqDb()
+	// run
 	var ds []time.Duration
 	t := tachymeter.New(&tachymeter.Config{Size: *runs})
 	for i := 1; i <= *runs; i++ {

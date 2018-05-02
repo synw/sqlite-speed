@@ -8,11 +8,12 @@ import (
 	"time"
 )
 
+var gormDb *gorm.DB = connect("speedtest.sqlite")
+
 func GormRun(records []types.Record) (time.Duration, bool) {
-	db := connect("speedtest.sqlite")
 	//defer elapsed(len(records))()
 	start := time.Now()
-	tx := db.Begin()
+	tx := gormDb.Begin()
 	for i, rec := range records {
 		tx.Create(&rec)
 		if tx.Error != nil {
@@ -28,9 +29,9 @@ func GormRun(records []types.Record) (time.Duration, bool) {
 }
 
 func connect(addr string) *gorm.DB {
-	db, err := gorm.Open("sqlite3", addr)
+	gdb, err := gorm.Open("sqlite3", addr)
 	if err != nil {
 		panic(err)
 	}
-	return db
+	return gdb
 }

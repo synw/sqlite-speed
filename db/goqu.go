@@ -11,14 +11,10 @@ import (
 	"time"
 )
 
+var db *goqu.Database
+
 func GoqRun(records []types.Record) (time.Duration, bool) {
-	sdb, err := sql.Open("sqlite3", "speedtest.sqlite")
 	var d time.Duration
-	if err != nil {
-		panic(err.Error())
-		return d, false
-	}
-	db := goqu.New("sqlite3", sdb)
 	recs := getGoqRecs(records)
 	//defer elapsed(len(records))()
 	start := time.Now()
@@ -27,6 +23,14 @@ func GoqRun(records []types.Record) (time.Duration, bool) {
 		return d, false
 	}
 	return time.Since(start), true
+}
+
+func InitGoqDb() {
+	sdb, err := sql.Open("sqlite3", "speedtest.sqlite")
+	if err != nil {
+		panic(err.Error())
+	}
+	db = goqu.New("sqlite3", sdb)
 }
 
 func getGoqRecs(records []types.Record) []goqu.Record {
