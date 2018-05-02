@@ -36,7 +36,7 @@ Inserting 1000 records (average of 10 runs):
 
 Quick conclusion: Gorm and Goqu are nearly equivalent and Dataset is 3x times slower.
 
-## Run the test
+## Run the tests
 
 Get the stuff:
 
@@ -63,5 +63,7 @@ Option: use the `-r` flag to specify the number of records to insert (default is
 
 ## Todo
 
-Automate multiple runs and stats
+- [ ] Automate multiple runs and stats
+- [ ] Test with Xorm
+- [ ] Maybe test with Django orm
 
