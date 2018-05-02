@@ -46,11 +46,23 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-n', dest='records', type=int, default=1000,
                         help='Number of records to insert')
+    parser.add_argument('-r', dest='runs', type=int, default=10,
+                        help='Number of runs to make')
     args = parser.parse_args()
-    print("Starting to save records ...")
-    start = datetime.datetime.now()
+    print("Starting to save", args.records, "records ...")
     recs = get_records(args.records)
-    insert(recs)
-    finish = datetime.datetime.now()
-    extime = finish - start
-    print("Saved", len(recs), "records in", extime)
+    i = 0
+    timer = datetime.datetime.now()
+    st = timer
+    while i < args.runs:
+        start = datetime.datetime.now()
+        insert(recs)
+        finish = datetime.datetime.now()
+        extime = finish - start
+        timer = timer + extime
+        print(extime)
+        i += 1
+    timer = timer - st
+    avg = timer / args.runs
+    print("Completed the", len(recs), "runs in an average of", avg,
+          ",all runs took", timer)
