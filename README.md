@@ -73,6 +73,12 @@ Rate/sec.:	4.76
 Quick conclusion: Dataset is about 3 times slower than the Go solutions. Goqu appears to
 be the fastest, and gorm is not far.
 
+Engine | Speed | Ease of use
+--- | --- | ---
+**Gorm** | ++++ | ++++
+**Goqu** | +++++ | +++
+**Dataset** | + | +++++
+
 ## Stats
 
 Use the `-s` flag to log the execution times per run 
