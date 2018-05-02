@@ -13,10 +13,13 @@ import (
 var runs = flag.Int("r", 10, "Number of runs to make")
 var records = flag.Int("n", 1000, "Number of records to insert")
 var engine = flag.String("e", "gorm", "Database engine")
+var statsDb string = "stats.sqlite"
 
 func main() {
 	flag.Parse()
 	fmt.Println("Start inserting", *records, "records with the", *engine, "engine")
+	// init stats db
+	db.InitStats(statsDb)
 	var ds []time.Duration
 	t := tachymeter.New(&tachymeter.Config{Size: *runs})
 	for i := 1; i <= *runs; i++ {
@@ -28,16 +31,21 @@ func main() {
 		fmt.Println(i, ":", d)
 		ds = append(ds, d)
 		t.AddTime(d)
+		// record metric in stats database
+		metric := getMetric(*engine, *records, i, *runs, d)
+		db.SaveMetric(metric)
 	}
 	var total time.Duration
 	for _, d := range ds {
 		total += d
 	}
 	dur := t.Calc()
+	//stats := fmt.Sprintf("%s", dur.JSON())
+	//fmt.Println(stats)
 	fmt.Println(dur.String())
 	fmt.Println("Completed the", *runs, "runs in an average of",
 		dur.Time.Avg,
-		", all runs took ", total)
+		",all runs took", total)
 }
 
 func run(engine string, records int) (time.Duration, bool) {
@@ -49,6 +57,18 @@ func run(engine string, records int) (time.Duration, bool) {
 		d, ok = db.GoqRun(getRecs(records))
 	}
 	return d, ok
+}
+
+func getMetric(engine string, numInserts int, run int, runs int, execTime time.Duration) types.Metric {
+	metric := types.Metric{
+		Engine:     engine,
+		NumInserts: numInserts,
+		TotalRuns:  runs,
+		Run:        run,
+		ExecTime:   int64(execTime / time.Millisecond),
+		Date:       time.Now(),
+	}
+	return metric
 }
 
 func getRecord() types.Record {

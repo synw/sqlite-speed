@@ -1,5 +1,9 @@
 package types
 
+import (
+	"time"
+)
+
 type Record struct {
 	Field1  string  `json:field1`
 	Field2  string  `json:field2`
@@ -16,4 +20,13 @@ type Record struct {
 	Field13 int     `json:field13`
 	Field14 float64 `json:field14`
 	Field15 bool    `json:field15`
+}
+
+type Metric struct {
+	Engine     string
+	NumInserts int
+	TotalRuns  int
+	Run        int
+	ExecTime   int64
+	Date       time.Time
 }

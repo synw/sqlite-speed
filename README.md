@@ -73,6 +73,11 @@ Rate/sec.:	4.76
 Quick conclusion: Dataset is about 3 times slower than the Go solutions. Goqu appears to
 be the fastest, and gorm is not far.
 
+## Stats
+
+The results datapoints are collected in a `stats.sqlite` database to be able to 
+process analytics on it [works in go, todo for python]
+
 ## Run the tests
 
    ```
