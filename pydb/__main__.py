@@ -5,7 +5,7 @@ import dataset
 db = dataset.connect('sqlite:///speedtest.sqlite')
 
 
-def get_records(num=100):
+def get_records(num=1000):
     recs = []
     i = 0
     while i < num:
@@ -44,7 +44,7 @@ def insert(recs):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('-r', dest='records', type=int, default=1000,
+    parser.add_argument('-n', dest='records', type=int, default=1000,
                         help='Number of records to insert')
     args = parser.parse_args()
     print("Starting to save records ...")

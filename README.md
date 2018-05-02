@@ -58,8 +58,8 @@ Start testing:
 - Gorm: `go run main.go`
 - Goqu: `go run main.go -e goqu`
 
-Option: use the `-r` flag to specify the number of records to insert (default is 1000). Ex:
-`go run main.go -r 10000`
+Option: use the `-n` flag to specify the number of records to insert (default is 1000). Ex:
+`go run main.go -n 10000`
 
 ## Todo
 

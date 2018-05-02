@@ -7,7 +7,8 @@ import (
 	"github.com/synw/sqlite-speed/types"
 )
 
-var records = flag.Int("r", 1000, "Number of records to insert")
+var runs = flag.Int("r", 10, "Number of runs to make")
+var records = flag.Int("n", 1000, "Number of records to insert")
 var engine = flag.String("e", "gorm", "Database engine")
 
 func main() {
