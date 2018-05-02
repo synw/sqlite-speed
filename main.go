@@ -13,13 +13,16 @@ import (
 var runs = flag.Int("r", 10, "Number of runs to make")
 var records = flag.Int("n", 1000, "Number of records to insert")
 var engine = flag.String("e", "gorm", "Database engine")
+var stats = flag.Bool("s", false, "Record stats")
 var statsDb string = "stats.sqlite"
 
 func main() {
 	flag.Parse()
 	fmt.Println("Start inserting", *records, "records with the", *engine, "engine")
 	// init stats db
-	db.InitStats(statsDb)
+	if *stats == true {
+		db.InitStats(statsDb)
+	}
 	var ds []time.Duration
 	t := tachymeter.New(&tachymeter.Config{Size: *runs})
 	for i := 1; i <= *runs; i++ {
@@ -31,9 +34,11 @@ func main() {
 		fmt.Println(i, ":", d)
 		ds = append(ds, d)
 		t.AddTime(d)
-		// record metric in stats database
-		metric := getMetric(*engine, *records, i, *runs, d)
-		db.SaveMetric(metric)
+		if *stats == true {
+			// record metric in stats database
+			metric := getMetric(*engine, *records, i, *runs, d)
+			db.SaveMetric(metric)
+		}
 	}
 	var total time.Duration
 	for _, d := range ds {

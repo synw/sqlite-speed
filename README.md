@@ -75,8 +75,10 @@ be the fastest, and gorm is not far.
 
 ## Stats
 
-The results datapoints are collected in a `stats.sqlite` database to be able to 
-process analytics on it [works in go, todo for python]
+Use the `-s` flag to log the execution times per run 
+
+The datapoints are collected in a `stats.sqlite` database to be able to 
+process analytics on it (works in go, todo for python)
 
 ## Run the tests
 
