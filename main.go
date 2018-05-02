@@ -25,7 +25,7 @@ func main() {
 			log.Println("Error executing inserts during run", i)
 			return
 		}
-		fmt.Println(d)
+		fmt.Println(i, ":", d)
 		ds = append(ds, d)
 		t.AddTime(d)
 	}
@@ -35,7 +35,7 @@ func main() {
 	}
 	dur := t.Calc()
 	fmt.Println(dur.String())
-	fmt.Println("Finished the", *runs, "runs in an average of",
+	fmt.Println("Completed the", *runs, "runs in an average of",
 		dur.Time.Avg,
 		", all runs took ", total)
 }
