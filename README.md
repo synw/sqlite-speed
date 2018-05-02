@@ -97,7 +97,7 @@ Go to `$GOPATH/src/github.com/synw/sqlite-speed`
 To create the database run the python script to add a first record:
 
    ```
-   python3 pydb -n 1
+   python3 pydb -n 1 -r 1
    ```
 
 Start testing:
