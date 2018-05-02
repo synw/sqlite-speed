@@ -26,17 +26,58 @@ All the tests wrap the insert statements into one single transaction.
 
 ## Results
 
-Inserting 1000 records (average of 10 runs):
+Inserting 1000 records (500 runs):
 
-**Dataset**: 789 milliseconds
+**Gorm**: average of 268 milliseconds
 
-**Gorm**: 263 milliseconds
+   ```
+Cumulative:	2m14.1530073s
+HMean:		265.290449ms
+Avg.:		268.306014ms
+p50: 		265.146922ms
+p75:		276.984217ms
+p95:		311.541648ms
+p99:		418.302206ms
+p999:		642.729644ms
+Long 5%:	375.964761ms
+Short 5%:	232.874774ms
+Max:		642.729644ms
+Min:		221.76369ms
+Range:		420.965954ms
+StdDev:		34.302226ms
+Rate/sec.:	3.73
+   ```
 
-**Goqu**: 253 milliseconds
+**Goqu**: average of 209 milliseconds
 
-Quick conclusion: Gorm and Goqu are nearly equivalent and Dataset is 3x times slower.
+   ```
+Cumulative:	1m44.986583994s
+HMean:		207.157227ms
+Avg.:		209.973167ms
+p50: 		205.084806ms
+p75:		216.253239ms
+p95:		242.910185ms
+p99:		354.530163ms
+p999:		535.133082ms
+Long 5%:	306.202476ms
+Short 5%:	180.577667ms
+Max:		535.133082ms
+Min:		173.921859ms
+Range:		361.211223ms
+StdDev:		30.698196ms
+Rate/sec.:	4.76
+   ```
+   
+**Dataset**: average of 796 milliseconds  [todo: detailed python stats]
+
+Quick conclusion: Dataset is about 3 times slower than the Go solutions. Goqu appears to
+be the fastest, and gorm is not far.
 
 ## Run the tests
+
+   ```
+   pip install dataset
+   ```
 
 Get the stuff:
 
@@ -49,7 +90,7 @@ Go to `$GOPATH/src/github.com/synw/sqlite-speed`
 To create the database run the python script to add a first record:
 
    ```
-   python3 pydb -r 1
+   python3 pydb -n 1
    ```
 
 Start testing:
@@ -58,12 +99,17 @@ Start testing:
 - Gorm: `go run main.go`
 - Goqu: `go run main.go -e goqu`
 
-Option: use the `-n` flag to specify the number of records to insert (default is 1000). Ex:
-`go run main.go -n 10000`
+Optional command line arguments:
+
+`-n`: sets the number of records to insert per run. Default is 1000. 
+Ex: `go run main.go -n 10000`
+
+`-r`: sets the number of runs. Default is 10.
+Ex: `go run main.go -r 100`
 
 ## Todo
 
-- [ ] Automate multiple runs and stats
+- [x] Automate multiple runs and stats
 - [ ] Test with Xorm
 - [ ] Maybe test with Django orm
 
