@@ -9,6 +9,7 @@ import (
 
 func GormRun(records []types.Record) {
 	db := connect("speedtest.sqlite")
+	defer elapsed(len(records))()
 	tx := db.Begin()
 	for i, rec := range records {
 		tx.Create(&rec)

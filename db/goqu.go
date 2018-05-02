@@ -17,6 +17,7 @@ func GoqRun(records []types.Record) {
 	}
 	db := goqu.New("sqlite3", sdb)
 	recs := getGoqRecs(records)
+	defer elapsed(len(records))()
 	if _, err := db.From("records").Insert(recs).Exec(); err != nil {
 		fmt.Println(err.Error())
 		return

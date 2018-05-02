@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"github.com/synw/sqlite-speed/db"
 	"github.com/synw/sqlite-speed/types"
-	"time"
 )
 
 var records = flag.Int("r", 1000, "Number of records to insert")
@@ -14,7 +13,6 @@ var engine = flag.String("e", "gorm", "Database engine")
 func main() {
 	flag.Parse()
 	fmt.Println("Start inserting", *records, "records with the", *engine, "engine")
-	defer elapsed(*records)()
 	run(*engine, *records)
 	fmt.Println("Finished inserting", *records, "records")
 }
@@ -59,11 +57,4 @@ func getRecs(records int) []types.Record {
 		i += 1
 	}
 	return recs
-}
-
-func elapsed(records int) func() {
-	start := time.Now()
-	return func() {
-		fmt.Println("Saved", records, "records in", time.Since(start))
-	}
 }
