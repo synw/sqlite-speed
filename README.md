@@ -119,4 +119,5 @@ Ex: `go run main.go -r 100`
 - [x] Automate multiple runs and stats
 - [ ] Test with Xorm
 - [ ] Maybe test with Django orm
+- [ ] Data analytics pipeline to get charts from results
 
