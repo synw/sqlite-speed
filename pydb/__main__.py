@@ -60,7 +60,7 @@ if __name__ == '__main__':
         finish = datetime.datetime.now()
         extime = finish - start
         timer = timer + extime
-        print(extime)
+        print(i + 1, ":", extime)
         i += 1
     timer = timer - st
     avg = timer / args.runs
