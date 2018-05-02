@@ -3,8 +3,11 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/jamiealquiza/tachymeter"
 	"github.com/synw/sqlite-speed/db"
 	"github.com/synw/sqlite-speed/types"
+	"log"
+	"time"
 )
 
 var runs = flag.Int("r", 10, "Number of runs to make")
@@ -14,16 +17,38 @@ var engine = flag.String("e", "gorm", "Database engine")
 func main() {
 	flag.Parse()
 	fmt.Println("Start inserting", *records, "records with the", *engine, "engine")
-	run(*engine, *records)
-	fmt.Println("Finished inserting", *records, "records")
+	var ds []time.Duration
+	t := tachymeter.New(&tachymeter.Config{Size: *runs})
+	for i := 1; i <= *runs; i++ {
+		d, ok := run(*engine, *records)
+		if ok != true {
+			log.Println("Error executing inserts during run", i)
+			return
+		}
+		fmt.Println(d)
+		ds = append(ds, d)
+		t.AddTime(d)
+	}
+	var total time.Duration
+	for _, d := range ds {
+		total += d
+	}
+	dur := t.Calc()
+	fmt.Println(dur.String())
+	fmt.Println("Finished the", *runs, "runs in an average of",
+		dur.Time.Avg,
+		", all runs took ", total)
 }
 
-func run(engine string, records int) {
+func run(engine string, records int) (time.Duration, bool) {
+	var d time.Duration
+	var ok bool
 	if engine == "gorm" {
-		db.GormRun(getRecs(records))
+		d, ok = db.GormRun(getRecs(records))
 	} else if engine == "goqu" {
-		db.GoqRun(getRecs(records))
+		d, ok = db.GoqRun(getRecs(records))
 	}
+	return d, ok
 }
 
 func getRecord() types.Record {
