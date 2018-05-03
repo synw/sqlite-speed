@@ -75,7 +75,7 @@ if __name__ == '__main__':
                         help='Stats database location')
     args = parser.parse_args()
     print("Starting to save", args.records, "records per run.",
-          "Doing ", args.runs, "runs")
+          "Doing", args.runs, "runs")
     if args.stats is True:
         print("Logging results to stats db")
         initSdb(args.sdb)
