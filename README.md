@@ -28,65 +28,49 @@ All the tests wrap the insert statements into one single transaction.
 
 Inserting 1000 records (500 runs):
 
-**Gorm**: average of 268 milliseconds
+**Gorm**: average of 239 milliseconds
 
-   ```
-Cumulative:	2m14.1530073s
-HMean:		265.290449ms
-Avg.:		268.306014ms
-p50: 		265.146922ms
-p75:		276.984217ms
-p95:		311.541648ms
-p99:		418.302206ms
-p999:		642.729644ms
-Long 5%:	375.964761ms
-Short 5%:	232.874774ms
-Max:		642.729644ms
-Min:		221.76369ms
-Range:		420.965954ms
-StdDev:		34.302226ms
-Rate/sec.:	3.73
-   ```
-
-**Goqu**: average of 209 milliseconds
-
-   ```
-Cumulative:	1m44.986583994s
-HMean:		207.157227ms
-Avg.:		209.973167ms
-p50: 		205.084806ms
-p75:		216.253239ms
-p95:		242.910185ms
-p99:		354.530163ms
-p999:		535.133082ms
-Long 5%:	306.202476ms
-Short 5%:	180.577667ms
-Max:		535.133082ms
-Min:		173.921859ms
-Range:		361.211223ms
-StdDev:		30.698196ms
-Rate/sec.:	4.76
-   ```
+**Goqu**: average of 195 milliseconds
    
-**Dataset**: average of 796 milliseconds  [todo: detailed python stats]
+**Dataset**: average of 741 milliseconds
 
-Quick conclusion: Dataset is about 3 times slower than the Go solutions. Goqu appears to
-be the fastest, and gorm is not far.
+![All](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/bar.png)
+
+![Timeline](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/timeline_all.png)
+
+Legend: orange: Dataset, blue: Gorm, green: Goqu
+
+### Execution time
+
+##### Gorm
+
+![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/gorm_timeline.png)
+
+##### Goqu
+
+![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/goqu_timeline.png)
+
+##### Dataset
+
+![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/dataset_timeline.png)
+
+### Regularity
+
+This uses normalized data removing the extreme values to compare the most common cases.
+
+![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/goqu_gorm_norm.png)
+
+![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/dataset_norm.png)
+
+Dataset seems to be pretty irregular. Gorm looks a bit less constant than Goqu
+
+### Summary
 
 Engine | Speed | Ease of use
 --- | --- | ---
 **Gorm** | ++++ | ++++
 **Goqu** | +++++ | +++
 **Dataset** | + | +++++
-
-## Stats
-
-Use the `-s` flag to log the execution times per run 
-
-The datapoints are collected in a database to be able to 
-process analytics on it. The default database is `stats.sqlite`.
-To change the database location use the `-sdb` flag: ex:
-`python3 pydb -s -sbd /home/me/somewhere/stats.sqlite`
 
 ## Run the tests
 
@@ -122,10 +106,19 @@ Ex: `go run main.go -n 10000`
 `-r`: sets the number of runs. Default is 10.
 Ex: `go run main.go -r 100`
 
+## Stats
+
+Use the `-s` flag to log the execution times per run 
+
+The datapoints are collected in a database to be able to 
+process analytics on it. The default database is `stats.sqlite`.
+To change the database location use the `-sdb` flag: ex:
+`python3 pydb -s -sbd /home/me/somewhere/stats.sqlite`
+
 ## Todo
 
 - [x] Automate multiple runs and stats
 - [ ] Test with Xorm
 - [ ] Maybe test with Django orm
-- [ ] Data analytics pipeline to get charts from results
+- [ ] Publish the notebooks that build the charts from the collected data
 

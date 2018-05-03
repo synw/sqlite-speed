@@ -49,7 +49,7 @@ def initSdb(path):
     sdb = dataset.connect('sqlite:///'+path)
 
 
-def recStat(rid, exec_time, numi, numruns):
+def recStat(rid, exec_time, numi, numruns, run):
     global sdb
     table = sdb["metrics"]
     data = dict(
@@ -58,6 +58,7 @@ def recStat(rid, exec_time, numi, numruns):
             total_runs=numruns,
             run_id=rid,
             exec_time=exec_time,
+            run=run,
             date=datetime.datetime.now())
     table.insert(data)
 
@@ -93,7 +94,7 @@ if __name__ == '__main__':
         print(i + 1, ":", extime)
         if args.stats is True:
             ms = int(extime.total_seconds() * 1000)
-            recStat(rid, ms, args.records, args.runs)
+            recStat(rid, ms, args.records, args.runs, i)
         i += 1
     timer = timer - st
     avg = timer / args.runs
