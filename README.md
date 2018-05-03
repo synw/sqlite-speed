@@ -83,8 +83,10 @@ Engine | Speed | Ease of use
 
 Use the `-s` flag to log the execution times per run 
 
-The datapoints are collected in a `stats.sqlite` database to be able to 
-process analytics on it (works in go, todo for python)
+The datapoints are collected in a database to be able to 
+process analytics on it. The default database is `stats.sqlite`.
+To change the database location use the `-sdb` flag: ex:
+`python3 pydb -s -sbd /home/me/somewhere/stats.sqlite`
 
 ## Run the tests
 
