@@ -69,9 +69,9 @@ to the distribution of the values.
 
 Engine | Speed | Ease of use
 --- | --- | ---
-**Gorm** | ++++ | ++++
-**Goqu** | +++++ | +++
-**Dataset** | + | +++++
+Gorm | ++++ | ++++
+Goqu | +++++ | +++
+Dataset | + | +++++
 
 ## Run the tests
 
