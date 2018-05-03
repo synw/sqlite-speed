@@ -4,8 +4,14 @@ Test Sqlite write speed with various sql abstraction tools in Go and Python
 
 ## Tested tools
 
+### Go
+
 - [Gorm](https://github.com/jinzhu/gorm) : an orm in Go
 - [Goqu](https://github.com/doug-martin/goqu): an sql query builder in Go
+
+### Python
+
+- [Django orm](https://www.djangoproject.com/): the Django object relationnal mapper
 - [Dataset](https://github.com/pudo/dataset): an easy way to handle database operations
 in Python (uses [SqlAlchemy](http://www.sqlalchemy.org/) under the hood).
 
@@ -28,17 +34,19 @@ All the tests wrap the insert statements into one single transaction.
 
 Inserting 1000 records (500 runs):
 
-**Gorm**: average of 239 milliseconds
+**Gorm**: average of 239 ms. Best run: 177 ms. Worst run: 513 ms
 
-**Goqu**: average of 195 milliseconds
+**Goqu**: average of 195 ms. Best run: 152 ms. Worst run: 561 ms
    
-**Dataset**: average of 741 milliseconds
+**Django**: average of 314 ms. Best run: 259 ms. Worst run: 641 ms
 
-![All](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/bar.png)
+**Dataset**: average of 741 ms. Best run: 684 ms. Worst run: 1,49 s
 
-![Timeline](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/timeline_all.png)
+![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/bar.png)
 
-Legend: orange: Dataset, blue: Gorm, green: Goqu
+![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/timeline_all.png)
+
+Legend: orange: Dataset, red: Django, blue: Gorm, green: Goqu
 
 ### Execution time
 
@@ -49,6 +57,10 @@ Legend: orange: Dataset, blue: Gorm, green: Goqu
 #### Goqu
 
 ![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/goqu_timeline.png)
+
+#### Django
+
+![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/django_timeline.png)
 
 #### Dataset
 
@@ -62,6 +74,8 @@ This uses normalized data with the extreme values removed to compare the most co
 
 ![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/goqu_gorm_norm.png)
 
+![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/django_norm.png)
+
 ![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/dataset_norm.png)
 
 #### Distribution of the values
@@ -73,6 +87,10 @@ This uses normalized data with the extreme values removed to compare the most co
 #### Goqu
 
 ![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/goqu_distrib.png)
+
+#### Django
+
+![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/django_distrib.png)
 
 #### Dataset
 
@@ -89,6 +107,7 @@ Engine | Speed | Ease of use | Regularity
 --- | --- | --- | ---
 Gorm | ++++ | ++++ | +
 Goqu | +++++ | +++ | ++++
+Django | +++ | ++++ | ++++
 Dataset | + | +++++ | ++
 
 ## Run the tests
@@ -138,6 +157,6 @@ To change the database location use the `-sdb` flag: ex:
 
 - [x] Automate multiple runs and stats
 - [ ] Test with Xorm
-- [ ] Maybe test with Django orm
+- [x] Test with Django orm
 - [ ] Publish the notebooks that build the charts from the collected data
 
