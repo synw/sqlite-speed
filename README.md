@@ -58,11 +58,21 @@ Legend: orange: Dataset, blue: Gorm, green: Goqu
 
 This uses normalized data with the extreme values removed to compare the most common cases.
 
+#### Normalized execution speed comparison
+
 ![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/goqu_gorm_norm.png)
 
 ![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/dataset_norm.png)
 
-Dataset seems to have a lot of spikes. Considering the histograms above Gorm seems to be the most irregular regarding
+#### Distribution of the values
+
+![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/gorm_distrib.png)
+
+![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/goqu_distrib.png)
+
+![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/dataset_distrib.png)
+
+Dataset seems to have a lot of spikes. Considering the histograms Gorm seems to be the most irregular regarding
 to the distribution of the values.
 
 ### Summary
