@@ -83,11 +83,13 @@ to the distribution of the values.
 
 ### Summary
 
-Engine | Speed | Ease of use
---- | --- | ---
-Gorm | ++++ | ++++
-Goqu | +++++ | +++
-Dataset | + | +++++
+Note: this is a subjective estimation
+
+Engine | Speed | Ease of use | Regularity
+--- | --- | --- | ---
+Gorm | ++++ | ++++ | +
+Goqu | +++++ | +++ | ++++
+Dataset | + | +++++ | ++
 
 ## Run the tests
 
