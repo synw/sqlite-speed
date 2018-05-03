@@ -42,27 +42,27 @@ Legend: orange: Dataset, blue: Gorm, green: Goqu
 
 ### Execution time
 
-##### Gorm
+#### Gorm
 
 ![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/gorm_timeline.png)
 
-##### Goqu
+#### Goqu
 
 ![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/goqu_timeline.png)
 
-##### Dataset
+#### Dataset
 
 ![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/dataset_timeline.png)
 
 ### Regularity
 
-This uses normalized data removing the extreme values to compare the most common cases.
+This uses normalized data with the extreme values removed to compare the most common cases.
 
 ![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/goqu_gorm_norm.png)
 
 ![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/dataset_norm.png)
 
-Dataset seems to be pretty irregular. Gorm looks a bit less constant than Goqu
+Dataset seems to be pretty irregular. Gorm looks a bit less constant than Goqu.
 
 ### Summary
 
