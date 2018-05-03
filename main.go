@@ -14,14 +14,14 @@ var runs = flag.Int("r", 10, "Number of runs to make")
 var records = flag.Int("n", 1000, "Number of records to insert")
 var engine = flag.String("e", "gorm", "Database engine")
 var stats = flag.Bool("s", false, "Record stats")
-var statsDb string = "stats.sqlite"
+var statsDb = flag.String("sdb", "stats.sqlite", "Stats database location")
 
 func main() {
 	flag.Parse()
 	fmt.Println("Start inserting", *records, "records with the", *engine, "engine")
 	// init stuff
 	if *stats == true {
-		db.InitStats(statsDb)
+		db.InitStats(*statsDb)
 	}
 	db.InitGoqDb()
 	// run
@@ -52,7 +52,7 @@ func main() {
 	fmt.Println(dur.String())
 	fmt.Println("Completed the", *runs, "runs in an average of",
 		dur.Time.Avg,
-		",all runs took", total)
+		"all runs took", total)
 }
 
 func run(engine string, records int) (time.Duration, bool) {
