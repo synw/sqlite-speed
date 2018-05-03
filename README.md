@@ -106,7 +106,7 @@ Note: this is a subjective estimation
 Engine | Speed | Ease of use | Regularity
 --- | --- | --- | ---
 Gorm | ++++ | ++++ | +
-Goqu | +++++ | +++ | ++++
+Goqu | +++++ | +++ | +++
 Django | +++ | ++++ | +++++
 Dataset | + | +++++ | ++
 
