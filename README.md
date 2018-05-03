@@ -97,7 +97,7 @@ This uses normalized data with the extreme values removed to compare the most co
 ![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/dataset_distrib.png)
 
 Dataset seems to have a lot of spikes. Considering the histograms Gorm seems to be the most irregular regarding
-to the distribution of the values.
+to the distribution of the values. Django appears to be very regular.
 
 ### Summary
 
@@ -107,7 +107,7 @@ Engine | Speed | Ease of use | Regularity
 --- | --- | --- | ---
 Gorm | ++++ | ++++ | +
 Goqu | +++++ | +++ | ++++
-Django | +++ | ++++ | ++++
+Django | +++ | ++++ | +++++
 Dataset | + | +++++ | ++
 
 ## Run the tests
