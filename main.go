@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/SKAhack/go-shortid"
 	"github.com/jamiealquiza/tachymeter"
 	"github.com/synw/sqlite-speed/db"
 	"github.com/synw/sqlite-speed/types"
@@ -16,6 +17,8 @@ var engine = flag.String("e", "gorm", "Database engine")
 var stats = flag.Bool("s", false, "Record stats")
 var statsDb = flag.String("sdb", "stats.sqlite", "Stats database location")
 
+var g = shortid.Generator()
+
 func main() {
 	flag.Parse()
 	fmt.Println("Start inserting", *records, "records with the", *engine, "engine")
@@ -27,6 +30,7 @@ func main() {
 	// run
 	var ds []time.Duration
 	t := tachymeter.New(&tachymeter.Config{Size: *runs})
+	rid := g.Generate()
 	for i := 1; i <= *runs; i++ {
 		d, ok := run(*engine, *records)
 		if ok != true {
@@ -38,7 +42,7 @@ func main() {
 		t.AddTime(d)
 		if *stats == true {
 			// record metric in stats database
-			metric := getMetric(*engine, *records, i, *runs, d)
+			metric := getMetric(*engine, *records, i, rid, *runs, d)
 			db.SaveMetric(metric)
 		}
 	}
@@ -66,12 +70,13 @@ func run(engine string, records int) (time.Duration, bool) {
 	return d, ok
 }
 
-func getMetric(engine string, numInserts int, run int, runs int, execTime time.Duration) types.Metric {
+func getMetric(engine string, numInserts int, run int, rid string, runs int, execTime time.Duration) types.Metric {
 	metric := types.Metric{
 		Engine:     engine,
 		NumInserts: numInserts,
 		TotalRuns:  runs,
 		Run:        run,
+		RunId:      rid,
 		ExecTime:   int64(execTime / time.Millisecond),
 		Date:       time.Now(),
 	}

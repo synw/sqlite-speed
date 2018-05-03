@@ -27,6 +27,7 @@ type Metric struct {
 	NumInserts int
 	TotalRuns  int
 	Run        int
+	RunId      string
 	ExecTime   int64
 	Date       time.Time
 }
