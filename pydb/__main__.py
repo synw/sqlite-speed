@@ -1,8 +1,10 @@
 import datetime
 import argparse
 import dataset
+import uuid
 
 db = dataset.connect('sqlite:///speedtest.sqlite')
+sdb = None
 
 
 def get_records(num=1000):
@@ -42,18 +44,46 @@ def insert(recs):
         raise(e)
 
 
+def initSdb(path):
+    global sdb
+    sdb = dataset.connect('sqlite:///'+path)
+
+
+def recStat(rid, exec_time, numi, numruns):
+    global sdb
+    table = sdb["metrics"]
+    data = dict(
+            engine="dataset",
+            num_inserts=numi,
+            total_runs=numruns,
+            run_id=rid,
+            exec_time=exec_time,
+            date=datetime.datetime.now())
+    table.insert(data)
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-n', dest='records', type=int, default=1000,
                         help='Number of records to insert')
     parser.add_argument('-r', dest='runs', type=int, default=10,
                         help='Number of runs to make')
+    parser.add_argument('-s', dest='stats', action='store_true',
+                        help='Log runs in a database')
+    parser.add_argument('-sdb', dest='sdb', type=str,
+                        default="stats.sqlite",
+                        help='Stats database location')
     args = parser.parse_args()
-    print("Starting to save", args.records, "records ...")
+    print("Starting to save", args.records, "records per run.",
+          "Doing ", args.runs, "runs")
+    if args.stats is True:
+        print("Logging results to stats db")
+        initSdb(args.sdb)
     recs = get_records(args.records)
     i = 0
     timer = datetime.datetime.now()
     st = timer
+    rid = str(uuid.uuid4())
     while i < args.runs:
         start = datetime.datetime.now()
         insert(recs)
@@ -61,8 +91,11 @@ if __name__ == '__main__':
         extime = finish - start
         timer = timer + extime
         print(i + 1, ":", extime)
+        if args.stats is True:
+            ms = int(extime.total_seconds() * 1000)
+            recStat(rid, ms, args.records, args.runs)
         i += 1
     timer = timer - st
     avg = timer / args.runs
     print("Completed the", len(recs), "runs in an average of", avg,
-          ",all runs took", timer)
+          "all runs took", timer)
