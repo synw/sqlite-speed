@@ -66,9 +66,15 @@ This uses normalized data with the extreme values removed to compare the most co
 
 #### Distribution of the values
 
+#### Gorm
+
 ![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/gorm_distrib.png)
 
+#### Goqu
+
 ![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/goqu_distrib.png)
+
+#### Dataset
 
 ![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/dataset_distrib.png)
 
