@@ -63,7 +63,7 @@ This uses normalized data with the extreme values removed to compare the most co
 ![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/dataset_norm.png)
 
 Dataset seems to have a lot of spikes. Considering the histograms above Gorm seems to be the most irregular regarding
-to the distributions of the values.
+to the distribution of the values.
 
 ### Summary
 
