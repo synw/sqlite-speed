@@ -135,6 +135,14 @@ Xorm | ++++ | ++++ | ++++
 Django | +++ | ++++ | +++++
 Dataset | + | +++++ | ++
 
+Some keypoints:
+
+- Gorm is easy and fast but irregular
+- Goqu is the fastest
+- Xorm is good in all fields
+- Django is very regular and quite fast
+- Dataset is the easiest to use, at the cost of speed and regularity
+
 ## Run the tests
 
    ```
@@ -157,9 +165,13 @@ To create the database run the python script to add a first record:
 
 Start testing:
 
-- Python: `python3 pydb`
 - Gorm: `go run main.go`
 - Goqu: `go run main.go -e goqu`
+- Xorm: `go run main.go -e xorm`
+
+- Dataset: `python3 dataset`
+- Django: see 
+[the instuctions](https://github.com/synw/sqlite-speed/tree/master/django)
 
 Optional command line arguments:
 
@@ -168,9 +180,6 @@ Ex: `go run main.go -n 10000`
 
 `-r`: sets the number of runs. Default is 10.
 Ex: `go run main.go -r 100`
-
-For how to run the Django tests see 
-[the instuctions](https://github.com/synw/sqlite-speed/tree/master/django)
 
 ## Stats
 
@@ -187,7 +196,8 @@ some [notebooks](https://github.com/synw/sqlite-speed-notebooks) are available
 ## Todo
 
 - [x] Automate multiple runs and stats
-- [ ] Test with Xorm
+- [x] Test with Xorm
 - [x] Test with Django orm
-- [ ] Publish the notebooks that build the charts from the collected data
+- [ ] Test with SqlAlchemy
+- [x] Publish the notebooks that build the charts from the collected data
 
