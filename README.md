@@ -47,9 +47,18 @@ Inserting 1000 records (500 runs):
 
 ![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/bar.png)
 
-![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/timeline_all.png)
+#### Go
 
-Legend: orange: Dataset, red: Django, blue: Gorm, green: Goqu
+Blue: Gorm, Yellow: Xorm, Green: Goqu
+
+![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/timeline_go.png)
+
+#### Python
+
+Orange: Django, Green: Dataset
+
+![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/timeline_python.png)
+
 
 ### Execution time
 
