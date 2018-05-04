@@ -178,6 +178,9 @@ process analytics on it. The default database is `stats.sqlite`.
 To change the database location use the `-sdb` flag: ex:
 `python3 pydb -s -sbd /home/me/somewhere/stats.sqlite`
 
+To run the analytics on the generated data 
+some [notebooks](https://github.com/synw/sqlite-speed-notebooks) are available 
+
 ## Todo
 
 - [x] Automate multiple runs and stats
