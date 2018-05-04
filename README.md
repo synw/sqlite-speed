@@ -169,6 +169,9 @@ Ex: `go run main.go -n 10000`
 `-r`: sets the number of runs. Default is 10.
 Ex: `go run main.go -r 100`
 
+For how to run the Django tests see 
+[the instuctions](https://github.com/synw/sqlite-speed/tree/master/django)
+
 ## Stats
 
 Use the `-s` flag to log the execution times per run 
