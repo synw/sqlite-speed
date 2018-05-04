@@ -66,6 +66,8 @@ func run(engine string, records int) (time.Duration, bool) {
 		d, ok = db.GormRun(getRecs(records))
 	} else if engine == "goqu" {
 		d, ok = db.GoqRun(getRecs(records))
+	} else if engine == "xorm" {
+		d, ok = db.XormRun(getRecs(records))
 	}
 	return d, ok
 }

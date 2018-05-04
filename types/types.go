@@ -22,6 +22,10 @@ type Record struct {
 	Field15 bool    `json:field15`
 }
 
+func (r Record) TableName() string {
+	return "records"
+}
+
 type Metric struct {
 	Engine     string
 	NumInserts int

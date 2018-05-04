@@ -6,14 +6,15 @@ Test Sqlite write speed with various sql abstraction tools in Go and Python
 
 ### Go
 
-- [Gorm](https://github.com/jinzhu/gorm) : an orm in Go
-- [Goqu](https://github.com/doug-martin/goqu): an sql query builder in Go
+- [Gorm](https://github.com/jinzhu/gorm) : an orm
+- [Goqu](https://github.com/doug-martin/goqu): an sql query builder
+- [Xorm](https://github.com/go-xorm/xorm): an orm
 
 ### Python
 
 - [Django orm](https://www.djangoproject.com/): the Django object relationnal mapper
 - [Dataset](https://github.com/pudo/dataset): an easy way to handle database operations
-in Python (uses [SqlAlchemy](http://www.sqlalchemy.org/) under the hood).
+in Python (uses [SqlAlchemy](http://www.sqlalchemy.org/) under the hood)
 
 ## Test design
 
@@ -34,9 +35,11 @@ All the tests wrap the insert statements into one single transaction.
 
 Inserting 1000 records (500 runs):
 
-**Gorm**: average of 239 ms. Best run: 177 ms. Worst run: 513 ms
-
 **Goqu**: average of 195 ms. Best run: 152 ms. Worst run: 561 ms
+
+**Xorm**: average of 214 ms. Best run: 188 ms. Worst run: 487 ms
+
+**Gorm**: average of 239 ms. Best run: 177 ms. Worst run: 513 ms
    
 **Django**: average of 314 ms. Best run: 259 ms. Worst run: 641 ms
 
@@ -58,6 +61,10 @@ Legend: orange: Dataset, red: Django, blue: Gorm, green: Goqu
 
 ![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/goqu_timeline.png)
 
+#### Xorm
+
+![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/xorm_timeline.png)
+
 #### Django
 
 ![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/django_timeline.png)
@@ -72,7 +79,7 @@ This uses normalized data with the extreme values removed to compare the most co
 
 #### Normalized execution speed comparison
 
-![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/goqu_gorm_norm.png)
+![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/go_norm.png)
 
 ![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/django_norm.png)
 
@@ -87,6 +94,10 @@ This uses normalized data with the extreme values removed to compare the most co
 #### Goqu
 
 ![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/goqu_distrib.png)
+
+#### Xorm
+
+![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/xorm_distrib.png)
 
 #### Django
 
