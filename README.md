@@ -79,7 +79,11 @@ This uses normalized data with the extreme values removed to compare the most co
 
 #### Normalized execution speed comparison
 
+##### Go
+
 ![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/go_norm.png)
+
+##### Python
 
 ![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/django_norm.png)
 
@@ -118,6 +122,7 @@ Engine | Speed | Ease of use | Regularity
 --- | --- | --- | ---
 Gorm | ++++ | ++++ | +
 Goqu | +++++ | +++ | +++
+Xorm | ++++ | ++++ | ++++
 Django | +++ | ++++ | +++++
 Dataset | + | +++++ | ++
 
