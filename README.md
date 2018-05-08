@@ -134,6 +134,8 @@ This measures the level of dispersion of the values around the mean
 
 **Goqu**: 18,6 %
 
+![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/bar_cvar.png)
+
 ### Summary
 
 Note: this is a subjective estimation
