@@ -170,7 +170,7 @@ Get the stuff:
 
 Go to `$GOPATH/src/github.com/synw/sqlite-speed`
 
-Create the test database::
+Create the test database:
 
    ```
    python3 dataset -c
