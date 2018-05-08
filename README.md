@@ -166,8 +166,8 @@ Some keypoints:
 
 - Gorm is easy and fast but irregular
 - Goqu is the fastest
-- Xorm is good in all fields
-- Django is very regular and pretty fast
+- Xorm is doing good in all fields
+- Django is very regular, easy and pretty fast
 - Sql Alchemy is quite fast and easy but not very regular
 - Dataset is the easiest to use, at the cost of speed
 
