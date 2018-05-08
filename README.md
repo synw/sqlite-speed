@@ -12,7 +12,8 @@ Test Sqlite write speed with various sql abstraction tools in Go and Python
 
 ### Python
 
-- [Django orm](https://www.djangoproject.com/): the Django object relationnal mapper
+- [Sql Alchemy](http://sqlalchemy.org/): an orm
+- [Django orm](https://www.djangoproject.com/): the Django orm
 - [Dataset](https://github.com/pudo/dataset): an easy way to handle database operations
 in Python (uses [SqlAlchemy](http://www.sqlalchemy.org/) under the hood)
 
@@ -40,6 +41,8 @@ Inserting 1000 records (500 runs):
 **Xorm**: average of 214 ms. Best run: 188 ms. Worst run: 487 ms
 
 **Gorm**: average of 239 ms. Best run: 177 ms. Worst run: 513 ms
+
+**Sql Alchemy**: average of 291 ms. Best run: 252 ms. Worst run: 982 ms
    
 **Django**: average of 314 ms. Best run: 259 ms. Worst run: 641 ms
 
@@ -55,7 +58,7 @@ Blue: Gorm, Yellow: Xorm, Green: Goqu
 
 #### Python
 
-Orange: Django, Green: Dataset
+Red: Sql Alchemy, Orange: Django, Green: Dataset
 
 ![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/timeline_python.png)
 
@@ -73,6 +76,10 @@ Orange: Django, Green: Dataset
 #### Xorm
 
 ![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/xorm_timeline.png)
+
+#### Sql Alchemy
+
+![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/sqla_timeline.png)
 
 #### Django
 
@@ -94,7 +101,7 @@ This uses normalized data with the extreme values removed to compare the most co
 
 ##### Python
 
-![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/django_norm.png)
+![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/django_sqla_norm.png)
 
 ![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/dataset_norm.png)
 
@@ -111,6 +118,10 @@ This uses normalized data with the extreme values removed to compare the most co
 #### Xorm
 
 ![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/xorm_distrib.png)
+
+#### Sql Alchemy
+
+![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/sqla_distrib.png)
 
 #### Django
 
@@ -132,6 +143,8 @@ This measures the level of dispersion of the values around the mean
 
 **Gorm**: 14 %
 
+**Sql Alchemy**: 16,6 %
+
 **Goqu**: 18,6 %
 
 ![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/bar_cvar.png)
@@ -145,6 +158,7 @@ Engine | Speed | Ease of use | Regularity
 Gorm | ++++ | ++++ | +
 Goqu | +++++ | +++ | ++
 Xorm | ++++ | ++++ | +++
+Sql Alchemy | +++ | +++ | 
 Django | +++ | ++++ | +++++
 Dataset | + | +++++ | +++
 
@@ -159,7 +173,7 @@ Some keypoints:
 ## Run the tests
 
    ```
-   pip install dataset
+   pip install dataset sqlalchemy
    ```
 
 Get the stuff:
@@ -182,6 +196,7 @@ Start testing:
 - Goqu: `go run main.go -e goqu`
 - Xorm: `go run main.go -e xorm`
 
+- Sql Alchemy: `python3 sqla`
 - Dataset: `python3 dataset`
 - Django: see 
 [the instuctions](https://github.com/synw/sqlite-speed/tree/master/django)
@@ -211,6 +226,6 @@ some [notebooks](https://github.com/synw/sqlite-speed-notebooks) are available
 - [x] Automate multiple runs and stats
 - [x] Test with Xorm
 - [x] Test with Django orm
-- [ ] Test with SqlAlchemy
+- [x] Test with SqlAlchemy
 - [x] Publish the notebooks that build the charts from the collected data
 
