@@ -120,8 +120,19 @@ This uses normalized data with the extreme values removed to compare the most co
 
 ![Img](https://raw.githubusercontent.com/synw/sqlite-speed/master/docs/img/dataset_distrib.png)
 
-Dataset seems to have a lot of spikes. Considering the histograms Gorm seems to be the most irregular regarding
-to the distribution of the values. Django appears to be very regular.
+#### Coefficient of variation
+
+This measures the level of dispersion of the values around the mean
+
+**Django**: 8,4 %
+
+**Dataset**: 9 %
+
+**Xorm**: 12,3 %
+
+**Gorm**: 14 %
+
+**Goqu**: 18,6 %
 
 ### Summary
 
@@ -130,10 +141,10 @@ Note: this is a subjective estimation
 Engine | Speed | Ease of use | Regularity
 --- | --- | --- | ---
 Gorm | ++++ | ++++ | +
-Goqu | +++++ | +++ | +++
-Xorm | ++++ | ++++ | ++++
+Goqu | +++++ | +++ | ++
+Xorm | ++++ | ++++ | +++
 Django | +++ | ++++ | +++++
-Dataset | + | +++++ | ++
+Dataset | + | +++++ | +++
 
 Some keypoints:
 
@@ -141,7 +152,7 @@ Some keypoints:
 - Goqu is the fastest
 - Xorm is good in all fields
 - Django is very regular and quite fast
-- Dataset is the easiest to use, at the cost of speed and regularity
+- Dataset is the easiest to use, at the cost of speed
 
 ## Run the tests
 
