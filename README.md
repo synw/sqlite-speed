@@ -151,14 +151,14 @@ This measures the level of dispersion of the values around the mean
 
 ### Summary
 
-Note: this is a subjective estimation
+Note: this is a totally subjective estimation
 
 Engine | Speed | Ease of use | Regularity
 --- | --- | --- | ---
-Gorm | ++++ | ++++ | +
-Goqu | +++++ | +++ | ++
+Gorm | ++++ | ++++ | ++
+Goqu | +++++ | +++ | +
 Xorm | ++++ | ++++ | +++
-Sql Alchemy | +++ | +++ | 
+Sql Alchemy | +++ | +++ | ++
 Django | +++ | ++++ | +++++
 Dataset | + | +++++ | +++
 
@@ -167,7 +167,8 @@ Some keypoints:
 - Gorm is easy and fast but irregular
 - Goqu is the fastest
 - Xorm is good in all fields
-- Django is very regular and quite fast
+- Django is very regular and pretty fast
+- Sql Alchemy is quite fast and easy but not very regular
 - Dataset is the easiest to use, at the cost of speed
 
 ## Run the tests
