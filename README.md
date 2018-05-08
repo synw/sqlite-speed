@@ -7,7 +7,7 @@ Test Sqlite write speed with various sql abstraction tools in Go and Python
 ### Go
 
 - [Gorm](https://github.com/jinzhu/gorm) : an orm
-- [Goqu](https://github.com/doug-martin/goqu): an sql query builder
+- [Goqu](https://github.com/doug-martin/goqu): a sql query builder
 - [Xorm](https://github.com/go-xorm/xorm): an orm
 
 ### Python
