@@ -165,7 +165,7 @@ Dataset | + | +++++ | +++
 Some keypoints:
 
 - Gorm is easy and fast but irregular
-- Goqu is the fastest
+- Goqu is the fastest irregular
 - Xorm is doing good in all fields
 - Django is very regular, easy and pretty fast
 - Sql Alchemy is quite fast and easy but not very regular
