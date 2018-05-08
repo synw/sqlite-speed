@@ -1,3 +1,4 @@
+import sys
 import datetime
 import argparse
 import dataset
@@ -46,7 +47,7 @@ def insert(recs):
 
 def initSdb(path):
     global sdb
-    sdb = dataset.connect('sqlite:///'+path)
+    sdb = dataset.connect('sqlite:///' + path)
 
 
 def recStat(rid, exec_time, numi, numruns, run):
@@ -62,9 +63,20 @@ def recStat(rid, exec_time, numi, numruns, run):
             date=datetime.datetime.now())
     table.insert(data)
 
+    
+def create_db():
+    global db
+    table = db["records"]
+    rec = get_records(1)[0]
+    table.insert(dict(rec))
+    db.query('DELETE FROM records')
+    print("Ok")
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
+    parser.add_argument('-c', dest='create', action="store_true",
+                        help='Create the database')
     parser.add_argument('-n', dest='records', type=int, default=1000,
                         help='Number of records to insert')
     parser.add_argument('-r', dest='runs', type=int, default=10,
@@ -80,6 +92,12 @@ if __name__ == '__main__':
     if args.stats is True:
         print("Logging results to stats db")
         initSdb(args.sdb)
+    
+    if args.create is True:
+        print("Creating the test database")
+        create_db()
+        sys.exit()
+    
     recs = get_records(args.records)
     i = 0
     timer = datetime.datetime.now()
